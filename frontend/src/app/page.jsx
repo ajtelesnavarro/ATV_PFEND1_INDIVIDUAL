@@ -1,69 +1,89 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+
+"use client";
+
+import { useState, useEffect } from "react";
+import CardProduto from "./components/CardProduto";
+import "./globals.css";
 
 export default function Home() {
+  const [listaProdutos, setListaProdutos] = useState([]);
+  const [msgErro, setMsgErro] = useState("");
+
+  useEffect(() => {
+    fetch("http://localhost:3000/api/produtos")
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Erro ao buscar produtos");
+        }
+
+        return res.json();
+      })
+      .then((data) => {
+        console.log("Resposta da API:", data);
+        console.log("É uma lista?", Array.isArray(data));
+
+        setListaProdutos(
+          Array.isArray(data) ? data : data.produtos ?? data.products ?? []
+        );
+
+        setMsgErro("");
+      })
+      .catch((error) => setMsgErro(error.message));
+  }, []);
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.js</code> file.
+    <main>
+      {/* Banner inicial */}
+
+
+
+
+      {/* Banner inicial */}
+      <section className="container-fluid py-5 text-center fundo-banner">
+        <div className="container">
+
+          <div className="d-flex justify-content-center align-items-center gap-3 mb-3">
+            <img src="/2.png" height="90" alt="Decoração" />
+            <img src="/3.png" height="120" alt="Decoração" />
+          </div>
+
+          <h1 className="fw-bold titulo-banner">
+            Seu cantinho roxo
           </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
+
+          <p className="lead">
+            Encontre seus produtos favoritos do BTS!
           </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
+
+          <a href="#produtos" className="btn botao-banner">
+            Ver produtos
           </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
         </div>
-      </main>
-    </div>
+      </section>
+
+
+
+      {/* Produtos vindos do backend */}
+      <section id="produtos" className="container py-4">
+        <h2 className="mb-4">Nossos mais vendidos</h2>
+
+        {msgErro && (
+          <p className="text-danger">{msgErro}</p>
+        )}
+
+        <div className="row">
+          {listaProdutos.map((produto) => (
+            <div className="col-12 col-md-6 col-lg-4 mb-4" key={produto.id}>
+              <CardProduto produto={produto} />
+            </div>
+          ))}
+        </div>
+
+        {!msgErro && listaProdutos.length === 0 && (
+          <p>Carregando produtos...</p>
+        )}
+      </section>
+    </main>
   );
 }
