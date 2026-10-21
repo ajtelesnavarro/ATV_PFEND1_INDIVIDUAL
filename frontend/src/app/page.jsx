@@ -55,7 +55,7 @@ export default function Home() {
             Encontre seus produtos favoritos do BTS!
           </p>
 
-          <a href="#produtos" className="btn botao-banner">
+          <a href="#produtos" className="btn botao-geral">
             Ver produtos
           </a>
 

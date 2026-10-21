@@ -13,11 +13,11 @@ export default function Header() {
         />
 
         <div className="navbar-direita d-flex align-items-center gap-3">
-          <Link href="/produtos" className="btn btn-primary">
+          <Link href="/produtos" className="btn botao-geral">
             Produtos
           </Link>
 
-          <Link href="/sobrenos" className="btn btn-primary">
+          <Link href="/sobrenos" className="btn botao-geral">
             Sobre Nós
           </Link>
         </div>

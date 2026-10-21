@@ -16,11 +16,7 @@ export default function CardProduto({ produto }) {
             Preço: R$ {produto.preco}
           </p>
   
-          <p className="card-text">
-            Estoque: {produto.quantidade}
-          </p>
-  
-          <button className="btn btn-primary">
+          <button className="btn botao-geral">
             Saiba Mais
           </button>
         </div>
