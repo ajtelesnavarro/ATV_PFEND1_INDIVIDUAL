@@ -17,8 +17,8 @@ export default function Header() {
             Produtos
           </Link>
 
-          <Link href="/sobrenos" className="btn botao-geral">
-            Sobre Nós
+          <Link href="/catalogo" className="btn botao-geral">
+            Catálogo
           </Link>
         </div>
       </nav>

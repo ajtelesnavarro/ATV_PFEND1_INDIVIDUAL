@@ -161,15 +161,6 @@ let produtos = [
         preco: 20,
         quantidade: 15,
         imagem: 'https://biasroomcdn.com/no-watermarked/J%20workspace/uploads/hdz934vakaaonpt_mmy8f8rw_fkvzct.jpeg'
-    },
-    {
-        id: 17,
-        nome: 'Photocard OT7',
-        categoria: 'Photocard',
-        descricao: 'Photocard com os sete integrantes do BTS',
-        preco: 30,
-        quantidade: 12,
-        imagem: 'https://biasroomcdn.com/no-watermarked/J%20workspace/uploads/9a8b2095-34ce-49a3-af99-562517e44849_-_copy_mmptpwb6_0repub.jpg'
     }
 ];
 
@@ -232,7 +223,8 @@ app.post('/api/produtos', (req, res) => {
         categoria: categoria.trim(),
         descricao: descricao.trim(),
         preco,
-        quantidade
+        quantidade,
+        imagem: req.body.imagem || ''
     };
 
     produtos.push(novoProduto);
@@ -276,7 +268,8 @@ app.put('/api/produtos/:id', (req, res) => {
         categoria: categoria.trim(),
         descricao: descricao.trim(),
         preco,
-        quantidade
+        quantidade,
+        imagem: req.body.imagem || produtos[indice].imagem
     };
 
     res.status(200).json(produtos[indice]);

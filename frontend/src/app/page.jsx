@@ -72,8 +72,9 @@ export default function Home() {
           <p className="text-danger">{msgErro}</p>
         )}
 
+        {/* aqui tive que pesquisar como limitava o map! */}
         <div className="row">
-          {listaProdutos.map((produto) => (
+          {listaProdutos.slice(0, 6).map((produto) => (
             <div className="col-12 col-md-6 col-lg-4 mb-4" key={produto.id}>
               <CardProduto produto={produto} />
             </div>
