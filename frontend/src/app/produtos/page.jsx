@@ -13,6 +13,7 @@ export default function Produtos() {
     const [quantidade, setQuantidade] = useState("");
     const [idEditando, setIdEditando] = useState(null);
     const [mensagem, setMensagem] = useState("");
+    const [imagem, setImagem] = useState("");
 
     //coloquei o link da api numa variavel pra ficar mais facil se precisar mudar dps
     const API = "http://localhost:3000/api/produtos";
@@ -70,6 +71,7 @@ export default function Produtos() {
             descricao,
             preco: Number(preco),
             quantidade: Number(quantidade),
+            imagem: imagem
         };
 
         const resposta = await fetch(
@@ -99,6 +101,7 @@ export default function Produtos() {
         setDescricao(produto.descricao);
         setPreco(produto.preco);
         setQuantidade(produto.quantidade);
+        setImagem(produto.imagem);
     }
 
     // aqui eu queria fazer aquela telinha de confirmação, mas não sabia fazer ent pesquisei pra ver se eu conseguia e era bem facil na vdd
@@ -193,6 +196,14 @@ export default function Produtos() {
                     required
                 />
 
+                <label className="form-label">Imagem (Em URL)</label>
+                <input
+                    type="text"
+                    className="form-control mb-3"
+                    value={preco}
+                    onChange={(e) => setImagem(e.target.value)}
+                />
+
                 {/* como eu queria que fosse algo bem rapido sem mts paginas coloquei esse ngc de ser ou salvar alterações ou cadastrar o produto*/}
                 {/*pq acho que fica mt mais bonito visualmente e tava nas minhas prioridades pra aprender como moldar o site pra preferencia do*/}
                 {/*usuário ent tive que pesquisar pra saber como era o passo-a-passo correto que tinha que fazer*/}
@@ -235,13 +246,15 @@ export default function Produtos() {
                                 {/* aqui eu so fiz um charmezinho pra mostrar se está abaixo de 10 rsrs */}
                                 <td>
                                     {produto.quantidade < 10 ? (
+                                        <p>Estoque baixo: 
                                         <span className="badge text-bg-danger">
-                                            {produto.quantidade}
-                                        </span>
+                                             {produto.quantidade} unidades
+                                        </span></p>
                                     ) : (
+                                        <p> Estoque normal: 
                                         <span className="badge text-bg-success">
-                                            {produto.quantidade}
-                                        </span>
+                                         {produto.quantidade} unidades
+                                        </span></p>
                                     )}
                                 </td>
 
