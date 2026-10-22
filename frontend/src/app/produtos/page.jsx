@@ -18,11 +18,26 @@ export default function Produtos() {
     const API = "http://localhost:3000/api/produtos";
 
     // aqui ele só vai dar fetch e dps transformar em um json
+    //dps se der algum bo ele responde com mensagem
+    //e se der outro erro tbm da outra msg
     async function listarProdutos() {
-        const resposta = await fetch(API);
-        const dados = await resposta.json();
-        setProdutos(dados);
+        try {
+            const resposta = await fetch(API);
+
+            if (!resposta.ok) {
+                throw new Error("Erro ao buscar produtos.");
+            }
+
+            const dados = await resposta.json();
+            setProdutos(dados);
+            setMensagem("");
+        } catch (erro) {
+            setMensagem(
+                "Não foi possível carregar os produtos. Verifique se o servidor está ligado."
+            );
+        }
     }
+
 
     useEffect(() => {
         listarProdutos();
@@ -216,7 +231,20 @@ export default function Produtos() {
                                 <td>{produto.nome}</td>
                                 <td>{produto.categoria}</td>
                                 <td>R$ {Number(produto.preco).toFixed(2)}</td>
-                                <td>{produto.quantidade}</td>
+
+                                {/* aqui eu so fiz um charmezinho pra mostrar se está abaixo de 10 rsrs */}
+                                <td>
+                                    {produto.quantidade < 10 ? (
+                                        <span className="badge text-bg-danger">
+                                            {produto.quantidade}
+                                        </span>
+                                    ) : (
+                                        <span className="badge text-bg-success">
+                                            {produto.quantidade}
+                                        </span>
+                                    )}
+                                </td>
+
                                 <td>
                                     <button
                                         className="btn btn-sm botao-geral me-2 mb-1"

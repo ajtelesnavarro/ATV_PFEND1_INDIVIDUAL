@@ -34,19 +34,19 @@ export default function DetalhesProduto() {
   }
 
   return (
-    <main className="container py-5">
-      <div className="row align-items-center g-4">
+    <main className="container py-2">
+      <div className="row align-items-center g-2 produto-detalhes">
         <div className="col-12 col-md-6">
           <img
             src={produto.imagem}
             alt={produto.nome}
-            className="img-fluid rounded"
+            className="img-fluid rounded imagem-produto"
           />
         </div>
 
-        <div className="col-12 col-md-6">
+        <div className="infos-gerais col-12 col-md-6 text-center">
           <h1>{produto.nome}</h1>
-          <p>Categoria: {produto.categoria}</p>
+          <span className="badge categoria-produto p-2">{produto.categoria}</span>
           <p>{produto.descricao}</p>
 
           <h3>

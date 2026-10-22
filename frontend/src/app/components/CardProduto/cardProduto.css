@@ -1,0 +1,7 @@
+.categoria-produto {
+    background-color: var(--roxo-20);
+    color: var(--roxo-50);
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}

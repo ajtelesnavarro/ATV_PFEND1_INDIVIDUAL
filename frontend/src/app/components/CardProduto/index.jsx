@@ -14,12 +14,12 @@ export default function CardProduto({ produto }) {
       <div className="card-infos p-2">
         <h5 className="card-title">{produto.nome}</h5>
 
-        <p className="card-text">
-          Categoria: {produto.categoria}
+        <p className="badge categoria-produto p-2">
+          {produto.categoria}
         </p>
 
         <p className="card-text">
-          Preço: R$ {produto.preco}
+          Preço: <span>R$ {produto.preco}</span>
         </p>
 
         <a className="btn botao-geral" href={`/catalogo/${produto.id}`}>
