@@ -279,7 +279,7 @@ app.put('/api/produtos/:id', (req, res) => {
 //resumindo ele pega o id que foi mandado no link e dps verifica se existe na array msm algo com o msmid, se nao tiver ja
 //responde com erro e fecha, se nao ele usa um .filter que cria uma nova array com tudo menos o objeto com o msm id que foi passado
 //dps retorna so uma mensagem de sucesso
-//aqui tive que usar a ia tbm no .some e no .filter pq o some eu nao sabia como usar pq pesquisei no site e nao sabia a sintaxe certa
+//aqui tive que pesquisar tbm no .some e no .filter pq o some eu nao sabia como usar pq pesquisei no site e nao sabia a sintaxe certa
 //e o filter pq eu nao sabia como real fazer pra deletar LKLLLLKKKK ai eu pesquisei e vi que real a maneira mais facil era reescrever
 //a array toda deixando so de fora o id passado
 app.delete('/api/produtos/:id', (req, res) => {
